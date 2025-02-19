@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.santander.ascender.ejerc005.model.Provincia;
 import es.santander.ascender.ejerc005.repository.ProvinciaRepository;
 import jakarta.annotation.PostConstruct;
 
+@Transactional
 @Service
 public class ProvinciaService {
 
@@ -41,11 +43,13 @@ public class ProvinciaService {
     }
 
     // Leer uno
+    @Transactional(readOnly = true)
     public Provincia read(Long id) {
         return repository.findById(id).orElse(null);
     }
 
     // Listar
+    @Transactional(readOnly = true)
     public List<Provincia> list() {
         return repository.findAll();
     }

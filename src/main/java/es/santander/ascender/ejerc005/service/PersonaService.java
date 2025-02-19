@@ -4,11 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import es.santander.ascender.ejerc005.model.Persona;
 import es.santander.ascender.ejerc005.repository.PersonaRepository;
 import jakarta.annotation.PostConstruct;
 
+@Transactional
 @Service
 public class PersonaService {
 
@@ -18,7 +20,7 @@ public class PersonaService {
     // Crear registros
     @PostConstruct
     public void init() {
-        
+
         if (repository.count() == 0) {
             Persona persona1 = new Persona(null, "Juan", "Gomez", 30l);
             Persona persona2 = new Persona(null, "Maria", "Perez", 21l);
@@ -41,11 +43,13 @@ public class PersonaService {
     }
 
     // Leer uno
+    @Transactional(readOnly = true)
     public Persona read(Long id) {
         return repository.findById(id).orElse(null);
     }
 
     // Listar
+    @Transactional(readOnly = true)
     public List<Persona> list() {
         return repository.findAll();
     }
