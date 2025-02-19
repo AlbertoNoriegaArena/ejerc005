@@ -33,10 +33,10 @@ public class PersonaRepositoryTest {
 
         personaRepository.save(persona);
 
-        // Listamos todos los Personaes
+        // Listamos todas las Personas
         Iterable<Persona> valores = personaRepository.findAll();
 
-        // Comprobar que valore no es nulo y que el Persona se guardó en la lista
+        // Comprobar que valores no es nulo y que el Persona se guardó en la lista
         assertNotNull(valores);
     }
 
@@ -59,6 +59,45 @@ public class PersonaRepositoryTest {
         // Verificamos que el Persona existe
         assertFalse(resultado.isEmpty());
         assertEquals(personaAGuardar.getId(), resultado.get().getId());
+    }
+
+    @Test
+    public void testGuardarPersona() {
+
+        Persona personaAGuardar = new Persona(null, "Juan", "Perez", 20l);
+
+        Persona personaGuardada = personaRepository.save(personaAGuardar);
+
+        assertNotNull(personaGuardada.getId());
+        assertEquals(personaAGuardar.getNombre(), personaGuardada.getNombre());
+        assertEquals(personaAGuardar.getApellido(), personaGuardada.getApellido());
+    }
+
+    @Test
+    public void testUpdatePersona() {
+
+        Persona personaAGuardar = new Persona(null, "Ana", "Gomez", 30L);
+        Persona personaAModificar = personaRepository.save(personaAGuardar);
+
+        personaAModificar.setNombre("Ana Maria");
+        personaAModificar.setApellido("Ortega");
+
+        Persona personaActualizada = personaRepository.save(personaAModificar);
+
+        assertEquals("Ana Maria", personaActualizada.getNombre());
+        assertEquals("Ortega", personaActualizada.getApellido());
+    }
+
+    @Test
+    public void testBorrarPersona() {
+
+        Persona personaAGuardar = new Persona(null, "Ana", "Gomez", 30L);
+        Persona personaGuardada = personaRepository.save(personaAGuardar);
+
+        personaRepository.deleteById(personaGuardada.getId());
+
+        Optional<Persona> personaEliminada = personaRepository.findById(personaGuardada.getId());
+        assertFalse(personaEliminada.isPresent());
     }
 
 }
