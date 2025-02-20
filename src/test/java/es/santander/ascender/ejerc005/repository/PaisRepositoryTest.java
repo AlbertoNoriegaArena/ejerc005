@@ -38,7 +38,7 @@ public class PaisRepositoryTest {
 
     @Test
     public void testNoExiste() {
-        
+
         Optional<Pais> resultado = paisRepository.findById(45L);
 
         assertTrue(resultado.isEmpty());
@@ -46,31 +46,30 @@ public class PaisRepositoryTest {
 
     @Test
     public void testLeerUno() {
-        Pais paisAGuardar = new Pais(null, "Francia", "País de Europa", "Europa");
-        paisRepository.save(paisAGuardar);
 
-        Optional<Pais> resultado = paisRepository.findById(paisAGuardar.getId());
+        paisRepository.save(pais);
+
+        Optional<Pais> resultado = paisRepository.findById(pais.getId());
 
         assertFalse(resultado.isEmpty());
-        assertEquals(paisAGuardar.getId(), resultado.get().getId());
+        assertEquals(pais.getId(), resultado.get().getId());
     }
 
     @Test
     public void testGuardarPais() {
-        Pais paisAGuardar = new Pais(null, "Italia", "País mediterráneo", "Europa");
 
-        Pais paisGuardado = paisRepository.save(paisAGuardar);
+        Pais paisGuardado = paisRepository.save(pais);
 
         assertNotNull(paisGuardado.getId());
-        assertEquals(paisAGuardar.getNombre(), paisGuardado.getNombre());
-        assertEquals(paisAGuardar.getDescripcion(), paisGuardado.getDescripcion());
-        assertEquals(paisAGuardar.getContinente(), paisGuardado.getContinente());
+        assertEquals(pais.getNombre(), paisGuardado.getNombre());
+        assertEquals(pais.getDescripcion(), paisGuardado.getDescripcion());
+        assertEquals(pais.getContinente(), paisGuardado.getContinente());
     }
 
     @Test
     public void testUpdatePais() {
-        Pais paisAGuardar = new Pais(null, "Alemania", "País de Europa", "Europa");
-        Pais paisAModificar = paisRepository.save(paisAGuardar);
+
+        Pais paisAModificar = paisRepository.save(pais);
 
         paisAModificar.setNombre("Belgica");
         paisAModificar.setDescripcion("País belga");
@@ -83,8 +82,8 @@ public class PaisRepositoryTest {
 
     @Test
     public void testBorrarPais() {
-        Pais paisAGuardar = new Pais(null, "Portugal", "País de Europa", "Europa");
-        Pais paisGuardado = paisRepository.save(paisAGuardar);
+
+        Pais paisGuardado = paisRepository.save(pais);
 
         paisRepository.deleteById(paisGuardado.getId());
 

@@ -46,30 +46,29 @@ public class ProvinciaRepositoryTest {
 
     @Test
     public void testLeerUno() {
-        Provincia provinciaAGuardar = new Provincia(null, "Barcelona");
-        provinciaRepository.save(provinciaAGuardar);
 
-        Optional<Provincia> resultado = provinciaRepository.findById(provinciaAGuardar.getId());
+        provinciaRepository.save(provincia);
+
+        Optional<Provincia> resultado = provinciaRepository.findById(provincia.getId());
 
         // Verificamos que la Provincia existe
         assertFalse(resultado.isEmpty());
-        assertEquals(provinciaAGuardar.getId(), resultado.get().getId());
+        assertEquals(provincia.getId(), resultado.get().getId());
     }
 
     @Test
     public void testGuardarProvincia() {
-        Provincia provinciaAGuardar = new Provincia(null, "Valencia");
 
-        Provincia provinciaGuardada = provinciaRepository.save(provinciaAGuardar);
+        Provincia provinciaGuardada = provinciaRepository.save(provincia);
 
         assertNotNull(provinciaGuardada.getId());
-        assertEquals(provinciaAGuardar.getNombre(), provinciaGuardada.getNombre());
+        assertEquals(provincia.getNombre(), provinciaGuardada.getNombre());
     }
 
     @Test
     public void testUpdateProvincia() {
-        Provincia provinciaAGuardar = new Provincia(null, "Sevilla");
-        Provincia provinciaAModificar = provinciaRepository.save(provinciaAGuardar);
+
+        Provincia provinciaAModificar = provinciaRepository.save(provincia);
 
         provinciaAModificar.setNombre("Cádiz");
 
@@ -80,8 +79,8 @@ public class ProvinciaRepositoryTest {
 
     @Test
     public void testBorrarProvincia() {
-        Provincia provinciaAGuardar = new Provincia(null, "Murcia");
-        Provincia provinciaGuardada = provinciaRepository.save(provinciaAGuardar);
+
+        Provincia provinciaGuardada = provinciaRepository.save(provincia);
 
         provinciaRepository.deleteById(provinciaGuardada.getId());
 

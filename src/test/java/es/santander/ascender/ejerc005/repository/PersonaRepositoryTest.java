@@ -51,33 +51,29 @@ public class PersonaRepositoryTest {
     @Test
     public void testLeerUno() {
 
-        Persona personaAGuardar = new Persona(null, "Juan", "Perez", 20l);
-        personaRepository.save(personaAGuardar);
+        personaRepository.save(persona);
 
-        Optional<Persona> resultado = personaRepository.findById(personaAGuardar.getId());
+        Optional<Persona> resultado = personaRepository.findById(persona.getId());
 
         // Verificamos que el Persona existe
         assertFalse(resultado.isEmpty());
-        assertEquals(personaAGuardar.getId(), resultado.get().getId());
+        assertEquals(persona.getId(), resultado.get().getId());
     }
 
     @Test
     public void testGuardarPersona() {
 
-        Persona personaAGuardar = new Persona(null, "Juan", "Perez", 20l);
-
-        Persona personaGuardada = personaRepository.save(personaAGuardar);
+        Persona personaGuardada = personaRepository.save(persona);
 
         assertNotNull(personaGuardada.getId());
-        assertEquals(personaAGuardar.getNombre(), personaGuardada.getNombre());
-        assertEquals(personaAGuardar.getApellido(), personaGuardada.getApellido());
+        assertEquals(persona.getNombre(), personaGuardada.getNombre());
+        assertEquals(persona.getApellido(), personaGuardada.getApellido());
     }
 
     @Test
     public void testUpdatePersona() {
 
-        Persona personaAGuardar = new Persona(null, "Ana", "Gomez", 30L);
-        Persona personaAModificar = personaRepository.save(personaAGuardar);
+        Persona personaAModificar = personaRepository.save(persona);
 
         personaAModificar.setNombre("Ana Maria");
         personaAModificar.setApellido("Ortega");
@@ -91,8 +87,7 @@ public class PersonaRepositoryTest {
     @Test
     public void testBorrarPersona() {
 
-        Persona personaAGuardar = new Persona(null, "Ana", "Gomez", 30L);
-        Persona personaGuardada = personaRepository.save(personaAGuardar);
+        Persona personaGuardada = personaRepository.save(persona);
 
         personaRepository.deleteById(personaGuardada.getId());
 
