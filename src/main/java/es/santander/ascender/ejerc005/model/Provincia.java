@@ -16,13 +16,22 @@ public class Provincia {
     private Long id;
 
     @NotNull
-    private  String nombre;
+    private String nombre;
 
-    public Provincia(){}
+    private Long pais_id;
+
+    public Provincia() {
+    }
 
     public Provincia(Long id, @NotNull String nombre) {
         this.id = id;
         this.nombre = nombre;
+    }
+
+    public Provincia(Long id, @NotNull String nombre, Long pais_id) {
+        this.id = id;
+        this.nombre = nombre;
+        this.pais_id = pais_id;
     }
 
     public Long getId() {
@@ -40,6 +49,13 @@ public class Provincia {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    
-    
+
+    public Long getPais_id() {
+        return pais_id;
+    }
+
+    public void setPais_id(Long pais_id) {
+        this.pais_id = pais_id;
+    }
+
 }
