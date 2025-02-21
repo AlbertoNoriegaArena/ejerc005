@@ -21,16 +21,15 @@ public class Documento {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    //Campo tipo TEXT para almacenar descripciones largas
+    // Campo tipo TEXT para almacenar descripciones largas
     @Lob
-    @NotNull(message = "El campo nombre no puede ser nulo")
     @NotBlank(message = "El campo nombre no puede estar vacio")
     @Size(max = 256, message = "El nombre no puede superar los 256 caracteres")
-    private  String nombre;
+    private String nombre;
 
     @Size(max = 15, message = "La extensión no puede superar los 15 caracteres")
     private String extension;
-    
+
     private boolean borrado;
 
     private LocalDate fecha_Creacion;
@@ -38,9 +37,10 @@ public class Documento {
     @NotNull
     private Long persona_Id;
 
-    public Documento() {}
+    public Documento() {
+    }
 
-    public Documento(Long id, @NotNull @NotBlank @Max(256) String nombre, @Max(15) String extension,
+    public Documento(Long id, @NotBlank @Max(256) String nombre, @Max(15) String extension,
             @NotNull boolean borrado, LocalDate fecha_Creacion, @NotNull Long persona_Id) {
         this.id = id;
         this.nombre = nombre;
@@ -97,7 +97,5 @@ public class Documento {
     public void setPersona_Id(Long persona_Id) {
         this.persona_Id = persona_Id;
     }
-
-    
 
 }
